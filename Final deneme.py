@@ -6,7 +6,7 @@ pg.init()
 clock = pg.time.Clock()
 
 # ekran boyu ayarlaması
-ekran = pg.display.set_mode((900,600))
+ekran = pg.display.set_mode((1000,700))
 
 #Uygulama ismi ayarlaması 
 pg.display.set_caption("FİNAL PROJESİ")
@@ -28,7 +28,7 @@ class Background(pg.sprite.Sprite):
 
 
 #ekran en boy ayarı ve renk seçenekleri 
-en , boy = 900 , 600
+en , boy = 1000 , 700
 gri = 125,125,125
 beyaz = 255 ,255, 255
 kirmizi = 255,0,0
@@ -41,8 +41,8 @@ ekran = pg.display.set_mode( (en,boy)  )
 
 # ekarana çizilen dikdortgen/kare nin en ve boy oranı
 kareler = []
-kare_en = 500
-kare_boy = 250
+kare_en = 600
+kare_boy = 300
 
 for i in range(en//kare_en * boy//kare_boy) :
     kareler.append((i * kare_en % en, (i * kare_en // en)*kare_boy ))
@@ -89,25 +89,29 @@ while True:
     
     # şekil çizimi 
     for cord in kareler:
-        pg.draw.rect(ekran,siyah,(190,180,kare_en,kare_boy), 5 )
+        pg.draw.rect(ekran,siyah,(200,220,kare_en,kare_boy), 5 )
     
     #Programda kullanılan resimleri ekrana ekleme
-    ekran.blit(pil_img, (395,400))
-    ekran.blit(direnc_img, (270, 166))
-    ekran.blit(voltmetre_img, (355, 425))
-    ekran.blit(ampermetre_img, (200, 398))
-    ekran.blit(ampuldevre_img, (400, 150))
+    ekran.blit(pil_img, (450,490))
+    ekran.blit(direnc_img, (270, 206))
+    ekran.blit(voltmetre_img, (405, 515))
+    ekran.blit(ampermetre_img, (200, 488))
+    ekran.blit(ampuldevre_img, (500, 192))
 
     #ekrana yazılan degerler
-    ekrana_yazi_yaz(ekran,"Voltaj =",750,50,siyah)# ikinci slota yazılanlar ekranda gözükecektir
-    ekrana_yazi_yaz(ekran,"Amper =",750,100,siyah)
-    ekrana_yazi_yaz(ekran,"Direnç =",750,150,siyah)
-    ekrana_yazi_yaz(ekran,str(a),800,150,siyah)
-    ekrana_yazi_yaz(ekran,str(c),800,100,siyah)
-    ekrana_yazi_yaz(ekran,str(b),800,50,siyah)
+    ekrana_yazi_yaz(ekran,"Voltaj =",850,50,siyah)# ikinci slota yazılanlar ekranda gözükecektir
+    ekrana_yazi_yaz(ekran,"Amper =",850,100,siyah)
+    ekrana_yazi_yaz(ekran,"Direnç =",850,150,siyah)
+    ekrana_yazi_yaz(ekran,str(a),900,150,siyah)
+    ekrana_yazi_yaz(ekran,str(c),900,100,siyah)
+    ekrana_yazi_yaz(ekran,str(b),900,50,siyah)
     
     pg.display.flip()
     clock.tick(1)
+
+
+
+
 
 
 
