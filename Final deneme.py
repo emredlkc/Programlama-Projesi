@@ -10,6 +10,20 @@ ekran = pg.display.set_mode((900,600))
 #Uygulama ismi ayarlaması 
 pg.display.set_caption("FİNAL PROJESİ")
 
+import pygame as pg 
+import sys
+import random
+
+pg.init()
+clock = pg.time.Clock()
+
+# ekran boyu ayarlaması
+ekran = pg.display.set_mode((900,600))
+
+#Uygulama ismi ayarlaması 
+pg.display.set_caption("FİNAL PROJESİ")
+
+
 #Uygulama resmi ayralanması 
 icon = pg.image.load("ampul.png")
 pg.display.set_icon(icon)
@@ -57,6 +71,17 @@ for i in range(en//kare_en * boy//kare_boy) :
         textReckt.centery = ty
         ekran.blit(text , textReckt)
 
+# direnç a voltaj b amper c
+a=random.randrange(1,10)
+b=random.randrange(1,10)
+c = b/a
+
+#resimleri program hafızasına yükleme kodu
+pil_img = pg.image.load('pil_30.png')
+direnc_img = pg.image.load('direnc_11.png')
+voltmetre_img = pg.image.load("voltmetre_10.png")
+ampermetre_img = pg.image.load("ampermetre_10.png")
+ampuldevre_img = pg.image.load("ampuldevre_15.png")
 
 
 while True:
@@ -65,19 +90,40 @@ while True:
             sys.exit();
     
     # arka plan resmini seçtiğimiz kısım 
-    BackGround = Background('arkaplan.png', [0,0])
+    BackGround = Background('arkaplann.png', [0,0])
     ekran.blit(BackGround.image, BackGround.rect)
 
+    # resim eklemek için gerekli kod
+    for event in pg.event.get():
+        if event.type == pg.QUIT:
+            run = False
+
+    
     # şekil çizimi 
     for cord in kareler:
-        pg.draw.rect(ekran,beyaz,(190,180,kare_en,kare_boy), 3 )
+        pg.draw.rect(ekran,siyah,(190,180,kare_en,kare_boy), 5 )
     
+    #Programda kullanılan resimleri ekrana ekleme
+    ekran.blit(pil_img, (395,405))
+    ekran.blit(direnc_img, (270, 166))
+    ekran.blit(voltmetre_img, (300, 500))
+    ekran.blit(ampermetre_img, (200, 398))
+    ekran.blit(ampuldevre_img, (400, 150))
+
     #ekrana yazılan degerler
-    ekrana_yazi_yaz(ekran,"deneme =",750,50,sari)# ikinci slota yazılanlar ekranda gözükecektir
-    ekrana_yazi_yaz(ekran,"deneme2 =",750,100,sari)
+    ekrana_yazi_yaz(ekran,"Voltaj =",750,50,siyah)# ikinci slota yazılanlar ekranda gözükecektir
+    ekrana_yazi_yaz(ekran,"Amper =",750,100,siyah)
+    ekrana_yazi_yaz(ekran,"Direnç =",750,150,siyah)
+    ekrana_yazi_yaz(ekran,str(a),800,150,siyah)
+    ekrana_yazi_yaz(ekran,str(c),800,100,siyah)
+    ekrana_yazi_yaz(ekran,str(b),800,50,siyah)
     
     pg.display.flip()
     clock.tick(1)
+
+
+
+
 
 
 
