@@ -11,9 +11,18 @@ ekran = pg.display.set_mode((900,600))
 pg.display.set_caption("FİNAL PROJESİ")
 
 #Uygulama resmi ayralanması 
-icon = pg.image.load("icon.png")
+icon = pg.image.load("ampul.png")
 pg.display.set_icon(icon)
 running = True
+
+# arka plan ayarlamak için gerekli kısım
+class Background(pg.sprite.Sprite):
+    def __init__(self, image_file, location):
+        pg.sprite.Sprite.__init__(self)  #call Sprite initializer
+        self.image = pg.image.load(image_file)
+        self.rect = self.image.get_rect()
+        self.rect.left, self.rect.top = location
+
 
 
 #ekran en boy ayarı ve renk seçenekleri 
@@ -49,20 +58,29 @@ for i in range(en//kare_en * boy//kare_boy) :
         ekran.blit(text , textReckt)
 
 
-#arka plan rengi ve şekil çizimi
-#ekrana yazılan degerler
+
 while True:
     for event in pg.event.get():
         if event.type == pg.QUIT :
             sys.exit();
-    ekran.fill(gri)
-    ekrana_yazi_yaz(ekran,"deneme =",750,50,siyah)# ikinci slota yazılanlar ekranda gözükecektir
-    ekrana_yazi_yaz(ekran,"deneme2 =",750,100,siyah)
-    for cord in kareler:
-        pg.draw.rect(ekran,beyaz,(150,150,kare_en,kare_boy), 3 )
+    
+    # arka plan resmini seçtiğimiz kısım 
+    BackGround = Background('arkaplan.png', [0,0])
+    ekran.blit(BackGround.image, BackGround.rect)
 
+    # şekil çizimi 
+    for cord in kareler:
+        pg.draw.rect(ekran,beyaz,(190,180,kare_en,kare_boy), 3 )
+    
+    #ekrana yazılan degerler
+    ekrana_yazi_yaz(ekran,"deneme =",750,50,sari)# ikinci slota yazılanlar ekranda gözükecektir
+    ekrana_yazi_yaz(ekran,"deneme2 =",750,100,sari)
+    
     pg.display.flip()
     clock.tick(1)
+
+
+
 
 
 
