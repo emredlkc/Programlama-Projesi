@@ -1,17 +1,5 @@
 import pygame as pg 
 import sys
-
-pg.init()
-clock = pg.time.Clock()
-
-# ekran boyu ayarlaması
-ekran = pg.display.set_mode((900,600))
-
-#Uygulama ismi ayarlaması 
-pg.display.set_caption("FİNAL PROJESİ")
-
-import pygame as pg 
-import sys
 import random
 
 pg.init()
@@ -104,9 +92,9 @@ while True:
         pg.draw.rect(ekran,siyah,(190,180,kare_en,kare_boy), 5 )
     
     #Programda kullanılan resimleri ekrana ekleme
-    ekran.blit(pil_img, (395,405))
+    ekran.blit(pil_img, (395,400))
     ekran.blit(direnc_img, (270, 166))
-    ekran.blit(voltmetre_img, (300, 500))
+    ekran.blit(voltmetre_img, (355, 425))
     ekran.blit(ampermetre_img, (200, 398))
     ekran.blit(ampuldevre_img, (400, 150))
 
@@ -120,6 +108,10 @@ while True:
     
     pg.display.flip()
     clock.tick(1)
+
+
+
+
 
 
 
