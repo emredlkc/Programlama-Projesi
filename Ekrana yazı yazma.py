@@ -33,4 +33,3 @@ while True:
 
     pg.display.flip()
     clock.tick(1)
-
