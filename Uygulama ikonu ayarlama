@@ -4,7 +4,7 @@ import sys
 
 pygame.init()
 
-ekran = pygame.display.set_mode((100,700))
+ekran = pygame.display.set_mode((1000,700))
 
 pygame.display.set_caption("FİNAL PROJESİ")
 
