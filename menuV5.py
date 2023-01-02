@@ -114,8 +114,8 @@ def game():
 
             if event.type == KEYDOWN:
                 if event.key == K_ESCAPE:
-                        pygame.quit()
-                        calis= False 
+                    main_menu()
+                      
 
 
 
