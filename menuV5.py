@@ -1,5 +1,7 @@
 import pygame 
 import sys
+import pygame as pg
+from subprocess import call
 
 
 from pygame.locals import * 
@@ -12,8 +14,17 @@ en= 1000
 boy = 700
 ekran = pygame.display.set_mode((en,boy))
 font =pygame.font.Font("font.ttf" , 20)
+#font = pg.font.SysFont('timesnewroman' , 18)
 # surf1 =font.render('ÇIK', True , 'white')
 # surf2 = font.render('BAŞLA',True , 'white')
+
+
+class Background(pg.sprite.Sprite):
+    def __init__(self, image_file, location):
+        pg.sprite.Sprite.__init__(self)  
+        self.image = pg.image.load(image_file)
+        self.rect = self.image.get_rect()
+        self.rect.left, self.rect.top = location
 
 
 def yazi_yaz(yazi , font , renk , surface ,x , y ):
@@ -21,14 +32,6 @@ def yazi_yaz(yazi , font , renk , surface ,x , y ):
     textrect = textobj.get_rect()
     textrect.topleft = (x,y)
     surface.blit(textobj, textrect)
-
-
-
-
-
-
-
-
 
 
 
@@ -40,12 +43,15 @@ def main_menu():
 
     while run:
 
-        ekran.fill((ekran_renk))
+        #ekran.fill((ekran_renk))
 
-        # yazi_yaz('menü ', font , (255,25,25),ekran, 20 , 20)
+        #yazi_yaz('menü ', font , (255,25,25),ekran, 20 , 20)
 
         a , b  = pygame.mouse.get_pos()
-                
+        BackGround = Background('images1_1000x700.png', [0,0])
+        ekran.blit(BackGround.image, BackGround.rect)
+
+        yazi_yaz('Hoşgeldiniz', font ,(255,255,255),ekran , 390,200)
 
         surf1 =font.render('ÇIK', True , 'white')
         surf2 = font.render('BAŞLA',True , 'white')
@@ -76,14 +82,7 @@ def main_menu():
                     game()    
 
 
-            
-                
 
-
-
-
-
-    
 
         if button_1.x <= a <= button_1.x +200 and button_1.y <= b <= button_1.y +100:
             pygame.draw.rect(ekran,(255,0,0),button_1)
@@ -107,7 +106,8 @@ def game():
     calis = True
     while calis:
         ekran.fill((0,0,0))
-        yazi_yaz('game', font ,(255,255,255),ekran , 20,20)
+        call(["python", "protot.py"])
+        #yazi_yaz('game', font ,(255,255,255),ekran , 20,20)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -119,10 +119,6 @@ def game():
 
 
 
-
-
-
-
         pygame.display.flip()
         pygame.display.update()
         mainClock.tick(60)
@@ -130,4 +126,3 @@ def game():
 
 
 main_menu()
-
