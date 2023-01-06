@@ -13,7 +13,9 @@ ekran =pygame.display.set_mode((en, boy ))
 pygame.display.set_caption('Final Projesi')
 
 # icon ayarlama
-
+icon = pg.image.load("görseller/ampulikon.png")
+pg.display.set_icon(icon)
+running = True
 
 
 # yazi tipi ayarlama
@@ -297,12 +299,12 @@ def game():
 
 
 
-        ekran.blit(devre_img,(30,120))
-        ekran.blit(pil_img, (640,220))
-        ekran.blit(direnc_img, (600,595))
-        ekran.blit(voltmetre_img, (600, 250))
-        ekran.blit(ampermetre_img, (340, 590))
-        ekran.blit(ampuldevre_img, (430, 210))
+        ekran.blit(devre_img,(260,220))
+        ekran.blit(pil_img, (600,480))
+        ekran.blit(direnc_img, (600,270))
+        ekran.blit(voltmetre_img, (560, 505))
+        ekran.blit(ampermetre_img, (380, 475))
+        ekran.blit(ampuldevre_img, (430, 190))
         siyah = 0,0,0
 
         # yazi_yaz("Voltaj =",font,siyah, ekran, 100,55,)# ikinci slota yazılanlar ekranda gözükecektir
@@ -360,12 +362,12 @@ def direnc(direnc_1):
 
 
 
-        ekran.blit(devre_img,(30,120))
-        ekran.blit(pil_img, (640,220))
-        ekran.blit(direnc_img, (600,595))
-        ekran.blit(voltmetre_img, (600, 250))
-        ekran.blit(ampermetre_img, (340, 590))
-        ekran.blit(ampuldevre_img, (430, 210))
+      ekran.blit(devre_img,(260,220))
+        ekran.blit(pil_img, (600,480))
+        ekran.blit(direnc_img, (600,270))
+        ekran.blit(voltmetre_img, (560, 505))
+        ekran.blit(ampermetre_img, (380, 475))
+        ekran.blit(ampuldevre_img, (430, 190))
         siyah = 0,0,0
 
 
@@ -420,12 +422,12 @@ def voltaj(voltaj_1):
 
 
 
-        ekran.blit(devre_img,(30,120))
-        ekran.blit(pil_img, (640,220))
-        ekran.blit(direnc_img, (600,595))
-        ekran.blit(voltmetre_img, (600, 250))
-        ekran.blit(ampermetre_img, (340, 590))
-        ekran.blit(ampuldevre_img, (430, 210))
+        ekran.blit(devre_img,(260,220))
+        ekran.blit(pil_img, (600,480))
+        ekran.blit(direnc_img, (600,270))
+        ekran.blit(voltmetre_img, (560, 505))
+        ekran.blit(ampermetre_img, (380, 475))
+        ekran.blit(ampuldevre_img, (430, 190))
         siyah = 0,0,0
         
         yazi_yaz(f"Direnç={direnc__}Ω" ,font, (255,255,255) ,ekran ,20,300)
@@ -473,12 +475,12 @@ def akimdan_diren():
 
 
 
-        ekran.blit(devre_img,(30,120))
-        ekran.blit(pil_img, (640,220))
-        ekran.blit(direnc_img, (600,595))
-        ekran.blit(voltmetre_img, (600, 250))
-        ekran.blit(ampermetre_img, (340, 590))
-        ekran.blit(ampuldevre_img, (430, 210))
+        ekran.blit(devre_img,(260,220))
+        ekran.blit(pil_img, (600,480))
+        ekran.blit(direnc_img, (600,270))
+        ekran.blit(voltmetre_img, (560, 505))
+        ekran.blit(ampermetre_img, (380, 475))
+        ekran.blit(ampuldevre_img, (430, 190))
         siyah = 0,0,0
 
 
@@ -533,12 +535,12 @@ def voltajsonu(voltajsonu):
 
 
 
-        ekran.blit(devre_img,(30,120))
-        ekran.blit(pil_img, (640,220))
-        ekran.blit(direnc_img, (600,595))
-        ekran.blit(voltmetre_img, (600, 250))
-        ekran.blit(ampermetre_img, (340, 590))
-        ekran.blit(ampuldevre_img, (430, 210))
+        ekran.blit(devre_img,(260,220))
+        ekran.blit(pil_img, (600,480))
+        ekran.blit(direnc_img, (600,270))
+        ekran.blit(voltmetre_img, (560, 505))
+        ekran.blit(ampermetre_img, (380, 475))
+        ekran.blit(ampuldevre_img, (430, 190))
         siyah = 0,0,0
 
         yazi_yaz(f"Direnç={voltaj_hesaplanirken_direnc} Ω" ,font, (255,255,255) ,ekran ,20,300)
@@ -585,12 +587,12 @@ def voltaj_hesaplandi(voltajhesaplandi):
 
 
 
-        ekran.blit(devre_img,(30,120))
-        ekran.blit(pil_img, (640,220))
-        ekran.blit(direnc_img, (600,595))
-        ekran.blit(voltmetre_img, (600, 250))
-        ekran.blit(ampermetre_img, (340, 590))
-        ekran.blit(ampuldevre_img, (430, 210))
+        ekran.blit(devre_img,(260,220))
+        ekran.blit(pil_img, (600,480))
+        ekran.blit(direnc_img, (600,270))
+        ekran.blit(voltmetre_img, (560, 505))
+        ekran.blit(ampermetre_img, (380, 475))
+        ekran.blit(ampuldevre_img, (430, 190))
         siyah = 0,0,0
         
         yazi_yaz(f"Direnç={voltaj_hesaplanirken_direnc} Ω" ,font, (255,255,255) ,ekran ,20,300)
@@ -638,12 +640,12 @@ def direncin_1_loop():
 
 
 
-        ekran.blit(devre_img,(30,120))
-        ekran.blit(pil_img, (640,220))
-        ekran.blit(direnc_img, (600,595))
-        ekran.blit(voltmetre_img, (600, 250))
-        ekran.blit(ampermetre_img, (340, 590))
-        ekran.blit(ampuldevre_img, (430, 210))
+        ekran.blit(devre_img,(260,220))
+        ekran.blit(pil_img, (600,480))
+        ekran.blit(direnc_img, (600,270))
+        ekran.blit(voltmetre_img, (560, 505))
+        ekran.blit(ampermetre_img, (380, 475))
+        ekran.blit(ampuldevre_img, (430, 190))
         siyah = 0,0,0
 
         # yazi_yaz("Voltaj =",font,siyah, ekran, 100,55,)# ikinci slota yazılanlar ekranda gözükecektir
@@ -695,12 +697,12 @@ def direncin_2_loop(direncloop2):
 
 
 
-        ekran.blit(devre_img,(30,120))
-        ekran.blit(pil_img, (640,220))
-        ekran.blit(direnc_img, (600,595))
-        ekran.blit(voltmetre_img, (600, 250))
-        ekran.blit(ampermetre_img, (340, 590))
-        ekran.blit(ampuldevre_img, (430, 210))
+       ekran.blit(devre_img,(260,220))
+        ekran.blit(pil_img, (600,480))
+        ekran.blit(direnc_img, (600,270))
+        ekran.blit(voltmetre_img, (560, 505))
+        ekran.blit(ampermetre_img, (380, 475))
+        ekran.blit(ampuldevre_img, (430, 190))
         siyah = 0,0,0
 
         yazi_yaz(f"Voltaj={direnc_hesaplarken_voltaj}V" ,font, (255,255,255) ,ekran ,20,300)
@@ -748,12 +750,12 @@ def direnc_3_loop(direncloop3):
 
 
 
-        ekran.blit(devre_img,(30,120))
-        ekran.blit(pil_img, (640,220))
-        ekran.blit(direnc_img, (600,595))
-        ekran.blit(voltmetre_img, (600, 250))
-        ekran.blit(ampermetre_img, (340, 590))
-        ekran.blit(ampuldevre_img, (430, 210))
+      ekran.blit(devre_img,(260,220))
+        ekran.blit(pil_img, (600,480))
+        ekran.blit(direnc_img, (600,270))
+        ekran.blit(voltmetre_img, (560, 505))
+        ekran.blit(ampermetre_img, (380, 475))
+        ekran.blit(ampuldevre_img, (430, 190))
         siyah = 0,0,0
         
         yazi_yaz(f"Voltaj={direnc_hesaplarken_voltaj} V" ,font, (255,255,255) ,ekran ,20,300)
