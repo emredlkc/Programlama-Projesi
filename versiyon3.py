@@ -6,8 +6,8 @@ import pygame as pg
 pygame.init()
 
 # ekran ayalarma
-en , boy = 1000 ,  700 
-ekran =pygame.display.set_mode((en, boy ))
+en,boy = 564 ,650
+ekran =pygame.display.set_mode((999,666))
 
 # ekran ismi (pencere ismi)
 pygame.display.set_caption('Final Projesi')
@@ -38,9 +38,9 @@ UI_REFRESH_RATE= mainClock.tick(60)/1000
 
 # input yerleri
 
-TEXT_INPUT= pygame_gui.elements.UITextEntryLine(relative_rect=pygame.Rect((275,100 ), (500,50)), manager=MANAGER,  object_id='#main_text_entry'  )
+TEXT_INPUT= pygame_gui.elements.UITextEntryLine(relative_rect=pygame.Rect((190,70 ), (200,50)), manager=MANAGER,  object_id='#main_text_entry'  )
 
-# akımı heplarken kullanılanlar:                                            
+# akımı hesaplarken kullanılanlar:                                            
 direnc_input= pygame_gui.elements.UITextEntryLine(relative_rect=pygame.Rect((400,60),(200,50)), manager=direnc1, object_id='#giris')
 
 voltaj_input = pygame_gui.elements.UITextEntryLine(relative_rect=pygame.Rect((400,60), (200,50)),manager=voltaj1, object_id='#voltaj')
@@ -56,7 +56,7 @@ direncteki_voltaj = pygame_gui.elements.UITextEntryLine(relative_rect=pygame.Rec
 direncteki_akim = pygame_gui.elements.UITextEntryLine(relative_rect=pygame.Rect((400,60),(200,50)),manager=direncakimi , object_id='#direnctekiakim')
 
 
-
+# arka plan ayarlamak için gerekli yer
 class Background(pg.sprite.Sprite):
 
     def __init__(self, image_file, location):
@@ -72,20 +72,20 @@ def show_user_name(user_name):
         
     run = True 
     ekran_renk = 50,0,50
-
-    
+    en , boy = 564 ,  650 
+    ekran =pygame.display.set_mode((en, boy ))
     while run:
-
-        ekran.fill((ekran_renk))
+        
+        #ekran.fill((ekran_renk))
 
         a , b  = pygame.mouse.get_pos()
-                
+        BackGround = Background('görseller/arkaplanmenu.jpg', [0,0])
+        ekran.blit(BackGround.image, BackGround.rect)
 
         surf1 =font.render('ÇIK', True , 'white')
         surf2 = font.render('BAŞLA',True , 'white')
-        button_1 = pygame.Rect(400,350,200,100)
-        button_2 = pygame.Rect(400,500,200,100)
-
+        button_1 = pygame.Rect(190,300,200,100)
+        button_2 = pygame.Rect(190,450,200,100)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -109,19 +109,20 @@ def show_user_name(user_name):
 
 
         if button_1.x <= a <= button_1.x +200 and button_1.y <= b <= button_1.y +100:
-            pygame.draw.rect(ekran,(255,0,0),button_1)
+            pygame.draw.rect(ekran,(38, 140, 7),button_1)
         else:
-            pygame.draw.rect(ekran,(200,110,110),button_1)
+            pygame.draw.rect(ekran,(255,0,0),button_1)
         ekran.blit(surf2, (button_1.x +50, button_1.y +35))
 
         if button_2.x <= a <=button_2.x +200  and button_2.y <= b <= button_2.y + 100:
-            pygame.draw.rect(ekran ,(255,0,0),button_2)
+            pygame.draw.rect(ekran ,(38, 140, 7),button_2)
         else: 
-            pygame.draw.rect(ekran ,(200,110,110),button_2 )
+            pygame.draw.rect(ekran ,(255,0,0),button_2 )
         ekran.blit(surf1, (button_2.x +75 , button_2.y+40))
 
-        new_text = pygame.font.Font("font.ttf", 50).render(f"Merhaba, {user_name}", True, "white")
-        new_text_rect = new_text.get_rect(center=(500, 250))
+        new_text = pygame.font.Font("font.ttf", 30).render(f"Merhaba, {user_name}", True, "white")
+        new_text_rect = new_text.get_rect(center=(290, 100))
+
 
         ekran.blit(new_text,new_text_rect)
         pygame.display.update()
@@ -141,22 +142,26 @@ def yazi_yaz(yazi , font , renk , surface ,x , y ):
 def main_menu():
     run = True 
     ekran_renk = 50,0,50
-
+    en= 564
+    boy = 650
+    ekran = pygame.display.set_mode((en,boy))
     
 
     while run:
 
-        ekran.fill((ekran_renk))
+        #ekran.fill((ekran_renk))
+        BackGround = Background('görseller/arkaplanmenu.jpg', [0,0])
+        ekran.blit(BackGround.image, BackGround.rect)
 
-        yazi_yaz('Adınızı giriniz: ', font , (255,25,25),ekran, 275 , 75)
+        yazi_yaz('Adınızı giriniz: ', font , (255,25,25),ekran, 140 , 45)
 
         a , b  = pygame.mouse.get_pos()
                 
 
         surf1 =font.render('ÇIK', True , 'white')
         surf2 = font.render('BAŞLA',True , 'white')
-        button_1 = pygame.Rect(400,350,200,100)
-        button_2 = pygame.Rect(400,500,200,100)
+        button_1 = pygame.Rect(190,300,200,100)
+        button_2 = pygame.Rect(190,450,200,100)
         UI_REFRESH_RATE= mainClock.tick(60)/1000
 
 
@@ -189,15 +194,15 @@ def main_menu():
 
 
         if button_1.x <= a <= button_1.x +200 and button_1.y <= b <= button_1.y +100:
-            pygame.draw.rect(ekran,(255,0,0),button_1)
+            pygame.draw.rect(ekran,(38, 140, 7),button_1)
         else:
-            pygame.draw.rect(ekran,(200,110,110),button_1)
+            pygame.draw.rect(ekran,(255,0,0),button_1)
         ekran.blit(surf2, (button_1.x +50, button_1.y +35))
 
         if button_2.x <= a <=button_2.x +200  and button_2.y <= b <= button_2.y + 100:
-            pygame.draw.rect(ekran ,(255,0,0),button_2)
+            pygame.draw.rect(ekran ,(38, 140, 7),button_2)
         else: 
-            pygame.draw.rect(ekran ,(200,110,110),button_2 )
+            pygame.draw.rect(ekran ,(255,0,0),button_2 )
         ekran.blit(surf1, (button_2.x +75 , button_2.y+40))
 
 
@@ -212,18 +217,20 @@ def main_menu():
 def arayuz():
 
     kos= True
+    en,boy = 1000 ,700
+    ekran =pygame.display.set_mode((en, boy ))
     while kos:
-        ekran.fill((52,85,78))
-
+        ekran.fill((44, 143, 163))
+        
         font_esc =pygame.font.Font("font.ttf" , 10)
 
 
         yazi_yaz("GERİ GİTMEK İÇİN: ESC BASINIZ", font_esc,(255,0,0),ekran,20,20)
-        yazi_yaz("YAPMAK İSTEDİĞİNİZ İŞLEMİ SEÇİNİZ:",font , (255,255,255),ekran,150,300)
+        yazi_yaz("BULMAK İSTEDİĞİNİZ ELEMANI SEÇİNİZ:",font , (255,255,255),ekran,140,300)
 
         (mx , my) = pygame.mouse.get_pos()
 
-        surf_voltaj =font.render('VOLTAJ', True , 'white')
+        surf_voltaj =font.render('VOLT', True , 'white')
         surf_akim =font.render('AKIM', True , 'white')
         surf_direnc = font.render('DİRENÇ',True,'white')
 
@@ -252,21 +259,21 @@ def arayuz():
 
                   
         if button_akim.x <= mx  <= button_akim.x + 150   and button_akim.y <= my <= button_akim.y + 100:
-            pygame.draw.rect(ekran,(255,0,0),button_akim)
+            pygame.draw.rect(ekran,(38, 140, 7),button_akim)
         else:
-            pygame.draw.rect(ekran ,(200,110,110),button_akim)
+            pygame.draw.rect(ekran ,(255,0,0),button_akim)
         ekran.blit(surf_akim, (button_akim.x + 40, button_akim.y + 35))
 
         if button_voltaj.x <= mx <= button_voltaj.x +  150 and button_voltaj.y <= my <= button_voltaj.y + 100:
-            pygame.draw.rect(ekran,(255,0,0),button_voltaj)
+            pygame.draw.rect(ekran,(38, 140, 7),button_voltaj)
         else:
-            pygame.draw.rect(ekran,(200,110,110),button_voltaj)
+            pygame.draw.rect(ekran,(255,0,0),button_voltaj)
         ekran.blit(surf_voltaj,(button_voltaj.x + 20 , button_voltaj.y + 35))
 
         if button_direnc.x <= mx <= button_direnc.x + 150 and button_direnc.y <= my <= button_direnc.y + 100:
-            pygame.draw.rect(ekran,(255,0,0),button_direnc)
+            pygame.draw.rect(ekran,(38, 140, 7),button_direnc)
         else:
-            pygame.draw.rect(ekran,(200,110,110),button_direnc)
+            pygame.draw.rect(ekran,(255,0,0),button_direnc)
         ekran.blit(surf_direnc,(button_direnc.x + 20,button_direnc.y + 35))
 
         pygame.display.update()
@@ -276,7 +283,8 @@ def arayuz():
 # game arayüzünü kullanırsak  direnc ve voltajı girip  akımı elde ederiz
 # akımın 1. loopu
 def game():
-
+    en,boy = 1000 ,700
+    ekran =pygame.display.set_mode((en, boy ))
 
 
     a , b = pygame.mouse.get_pos()
@@ -286,7 +294,7 @@ def game():
 
         
 
-        ekran.fill((52,70,100))
+        ekran.fill((54, 128, 247))
             
 
         # EKRANDAKİ RESİMLER: 
@@ -294,7 +302,7 @@ def game():
         direnc_img = pg.image.load('görseller/direnc_11.png')
         voltmetre_img = pg.image.load("görseller/voltmetre_10.png")
         ampermetre_img = pg.image.load("görseller/ampermetre_10.png")
-        ampuldevre_img = pg.image.load("görseller/ampul.2.png")
+        ampuldevre_img = pg.image.load("görseller/ampul.png")
         devre_img=pg.image.load("görseller/devre1.png")
 
 
@@ -343,13 +351,14 @@ def game():
 def direnc(direnc_1):
 
 
-
+    en,boy = 1000 ,700
+    ekran =pygame.display.set_mode((en, boy ))
     a , b = pygame.mouse.get_pos()
     go = True
     while go:
 
 
-        ekran.fill((52,70,100))
+        ekran.fill((54, 128, 247))
             
 
         # EKRANDAKİ RESİMLER: 
@@ -357,12 +366,12 @@ def direnc(direnc_1):
         direnc_img = pg.image.load('görseller/direnc_11.png')
         voltmetre_img = pg.image.load("görseller/voltmetre_10.png")
         ampermetre_img = pg.image.load("görseller/ampermetre_10.png")
-        ampuldevre_img = pg.image.load("görseller/ampul.2.png")
+        ampuldevre_img = pg.image.load("görseller/ampul.png")
         devre_img=pg.image.load("görseller/devre1.png")
 
 
 
-      ekran.blit(devre_img,(260,220))
+        ekran.blit(devre_img,(260,220))
         ekran.blit(pil_img, (600,480))
         ekran.blit(direnc_img, (600,270))
         ekran.blit(voltmetre_img, (560, 505))
@@ -408,16 +417,17 @@ def direnc(direnc_1):
 # akımın 3. loopu
 def voltaj(voltaj_1):
     running = True
-
+    en,boy = 1000 ,700
+    ekran =pygame.display.set_mode((en, boy ))
     a , b = pygame.mouse.get_pos()
     while running:
-        ekran.fill((52,70,100))
+        ekran.fill((54, 128, 247))
         # EKRANDAKİ RESİMLER: 
         pil_img = pg.image.load('görseller/pil_30.png')
         direnc_img = pg.image.load('görseller/direnc_11.png')
         voltmetre_img = pg.image.load("görseller/voltmetre_10.png")
         ampermetre_img = pg.image.load("görseller/ampermetre_10.png")
-        ampuldevre_img = pg.image.load("görseller/ampul.2.png")
+        ampuldevre_img = pg.image.load("görseller/ampul.png")
         devre_img=pg.image.load("görseller/devre1.png")
 
 
@@ -445,7 +455,7 @@ def voltaj(voltaj_1):
 
         akim_degeri = float(voltaj__)/float(direnc__)
 
-        yazi_yaz(f"AKIM: {akim_degeri} AMPER",font ,(255,0,0),ekran,400,100) 
+        yazi_yaz(f"★AKIM:{akim_degeri} AMPER★",font ,(77, 237, 52),ekran,5,400) 
 
 
         pygame.display.update()
@@ -454,7 +464,8 @@ def voltaj(voltaj_1):
 
 #voltajın 1. loopu
 def akimdan_diren():
-
+    en,boy = 1000 ,700
+    ekran =pygame.display.set_mode((en, boy ))
 
 
     a , b = pygame.mouse.get_pos()
@@ -462,7 +473,7 @@ def akimdan_diren():
     while go:
 
 
-        ekran.fill((52,70,100))
+        ekran.fill((54, 128, 247))
             
 
         # EKRANDAKİ RESİMLER: 
@@ -470,7 +481,7 @@ def akimdan_diren():
         direnc_img = pg.image.load('görseller/direnc_11.png')
         voltmetre_img = pg.image.load("görseller/voltmetre_10.png")
         ampermetre_img = pg.image.load("görseller/ampermetre_10.png")
-        ampuldevre_img = pg.image.load("görseller/ampul.2.png")
+        ampuldevre_img = pg.image.load("görseller/ampul.png")
         devre_img=pg.image.load("görseller/devre1.png")
 
 
@@ -518,11 +529,13 @@ def akimdan_diren():
 # voltajın 2. loopu
 def voltajsonu(voltajsonu):
     calis = True
+    en,boy = 1000 ,700
+    ekran =pygame.display.set_mode((en, boy ))
     while calis:
 
         
 
-        ekran.fill((52,70,100))
+        ekran.fill((54, 128, 247))
             
 
         # EKRANDAKİ RESİMLER: 
@@ -530,7 +543,7 @@ def voltajsonu(voltajsonu):
         direnc_img = pg.image.load('görseller/direnc_11.png')
         voltmetre_img = pg.image.load("görseller/voltmetre_10.png")
         ampermetre_img = pg.image.load("görseller/ampermetre_10.png")
-        ampuldevre_img = pg.image.load("görseller/ampul.2.png")
+        ampuldevre_img = pg.image.load("görseller/ampul.png")
         devre_img=pg.image.load("görseller/devre1.png")
 
 
@@ -573,16 +586,17 @@ def voltajsonu(voltajsonu):
 # voltajın 3. loopu
 def voltaj_hesaplandi(voltajhesaplandi):
     running = True
-
+    en,boy = 1000 ,700
+    ekran =pygame.display.set_mode((en, boy ))
     a , b = pygame.mouse.get_pos()
     while running:
-        ekran.fill((52,70,100))
+        ekran.fill((54, 128, 247))
         # EKRANDAKİ RESİMLER: 
         pil_img = pg.image.load('görseller/pil_30.png')
         direnc_img = pg.image.load('görseller/direnc_11.png')
         voltmetre_img = pg.image.load("görseller/voltmetre_10.png")
         ampermetre_img = pg.image.load("görseller/ampermetre_10.png")
-        ampuldevre_img = pg.image.load("görseller/ampul.2.png")
+        ampuldevre_img = pg.image.load("görseller/ampul.png")
         devre_img=pg.image.load("görseller/devre1.png")
 
 
@@ -610,7 +624,7 @@ def voltaj_hesaplandi(voltajhesaplandi):
 
         voltaj_degeri= float(voltaj_hesaplanirken_akim)* float(voltaj_hesaplanirken_direnc)
 
-        yazi_yaz(f"VOLTAJ: {voltaj_degeri} VOLT",font ,(255,0,0),ekran,400,100) 
+        yazi_yaz(f"★VOLTAJ:{voltaj_degeri} VOLT★",font ,(77, 237, 52),ekran,5,400) 
 
 
         pygame.display.update()
@@ -619,7 +633,8 @@ def voltaj_hesaplandi(voltajhesaplandi):
 
 # direncin 1. loopu
 def direncin_1_loop():
-    
+    en,boy = 1000 ,700
+    ekran =pygame.display.set_mode((en, boy ))
     a , b = pygame.mouse.get_pos()
 
     calis = True
@@ -627,7 +642,7 @@ def direncin_1_loop():
 
         
 
-        ekran.fill((52,70,100))
+        ekran.fill((54, 128, 247))
             
 
         # EKRANDAKİ RESİMLER: 
@@ -635,7 +650,7 @@ def direncin_1_loop():
         direnc_img = pg.image.load('görseller/direnc_11.png')
         voltmetre_img = pg.image.load("görseller/voltmetre_10.png")
         ampermetre_img = pg.image.load("görseller/ampermetre_10.png")
-        ampuldevre_img = pg.image.load("görseller/ampul.2.png")
+        ampuldevre_img = pg.image.load("görseller/ampul.png")
         devre_img=pg.image.load("görseller/devre1.png")
 
 
@@ -680,11 +695,13 @@ def direncin_1_loop():
 
 def direncin_2_loop(direncloop2):
     calis = True
+    en,boy = 1000 ,700
+    ekran =pygame.display.set_mode((en, boy ))
     while calis:
 
         
 
-        ekran.fill((52,70,100))
+        ekran.fill((54, 128, 247))
             
 
         # EKRANDAKİ RESİMLER: 
@@ -692,12 +709,12 @@ def direncin_2_loop(direncloop2):
         direnc_img = pg.image.load('görseller/direnc_11.png')
         voltmetre_img = pg.image.load("görseller/voltmetre_10.png")
         ampermetre_img = pg.image.load("görseller/ampermetre_10.png")
-        ampuldevre_img = pg.image.load("görseller/ampul.2.png")
+        ampuldevre_img = pg.image.load("görseller/ampul.png")
         devre_img=pg.image.load("görseller/devre1.png")
 
 
 
-       ekran.blit(devre_img,(260,220))
+        ekran.blit(devre_img,(260,220))
         ekran.blit(pil_img, (600,480))
         ekran.blit(direnc_img, (600,270))
         ekran.blit(voltmetre_img, (560, 505))
@@ -736,21 +753,22 @@ def direncin_2_loop(direncloop2):
 
 def direnc_3_loop(direncloop3):
     running = True
-
+    en,boy = 1000 ,700
+    ekran =pygame.display.set_mode((en, boy ))
     a , b = pygame.mouse.get_pos()
     while running:
-        ekran.fill((52,70,100))
+        ekran.fill((54, 128, 247))
         # EKRANDAKİ RESİMLER: 
         pil_img = pg.image.load('görseller/pil_30.png')
         direnc_img = pg.image.load('görseller/direnc_11.png')
         voltmetre_img = pg.image.load("görseller/voltmetre_10.png")
         ampermetre_img = pg.image.load("görseller/ampermetre_10.png")
-        ampuldevre_img = pg.image.load("görseller/ampul.2.png")
+        ampuldevre_img = pg.image.load("görseller/ampul.png")
         devre_img=pg.image.load("görseller/devre1.png")
 
 
 
-      ekran.blit(devre_img,(260,220))
+        ekran.blit(devre_img,(260,220))
         ekran.blit(pil_img, (600,480))
         ekran.blit(direnc_img, (600,270))
         ekran.blit(voltmetre_img, (560, 505))
@@ -773,7 +791,7 @@ def direnc_3_loop(direncloop3):
 
         direnc_degeri= float(direnc_hesaplarken_voltaj)/ float(direnc_hesaplanrken_akim)
 
-        yazi_yaz(f"DİRENÇ: {direnc_degeri} Ω",font ,(255,0,0),ekran,400,100) 
+        yazi_yaz(f"★DİRENÇ:{direnc_degeri} Ω★",font ,(77, 237, 52),ekran,5,400) 
 
 
         pygame.display.update()
