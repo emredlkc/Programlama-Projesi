@@ -15,7 +15,7 @@ boy = 650
 ekran = pygame.display.set_mode((en,boy))
 font =pygame.font.Font("font.ttf" , 20)
 MANAGER = pygame_gui.UIManager((en , boy ))
-#TEXT_INPUT1= pygame_gui.elements.UITextEntryLine(relative_rect=pygame.Rect((275,100 ), (500,50)), manager=MANAGER, object_id='#main_text_entry'  )
+TEXT_INPUT1= pygame_gui.elements.UITextEntryLine(relative_rect=pygame.Rect((190,70 ), (200,50)), manager=MANAGER, object_id='#main_text_entry'  )
 
 
 
@@ -31,13 +31,13 @@ def show_user_name(user_name):
 
     while run:
         a , b  = pygame.mouse.get_pos()
-        BackGround = Background('images1_1000x700.png', [0,0])
+        BackGround = Background('arkaplanmenu.jpg', [0,0])
         ekran.blit(BackGround.image, BackGround.rect)
 
         surf1 =font.render('ÇIK', True , 'white')
         surf2 = font.render('BAŞLA',True , 'white')
-        button_1 = pygame.Rect(400,350,200,100)
-        button_2 = pygame.Rect(400,500,200,100)
+        button_1 = pygame.Rect(190,300,200,100)
+        button_2 = pygame.Rect(190,450,200,100)
 
 
         for event in pygame.event.get():
@@ -71,8 +71,8 @@ def show_user_name(user_name):
             pygame.draw.rect(ekran ,(200,110,110),button_2 )
         ekran.blit(surf1, (button_2.x +75 , button_2.y+40))
 
-        new_text = pygame.font.Font("font.ttf", 50).render(f"Merhaba, {user_name}", True, "white")
-        new_text_rect = new_text.get_rect(center=(500, 250))
+        new_text = pygame.font.Font("font.ttf", 30).render(f"Merhaba, {user_name}", True, "white")
+        new_text_rect = new_text.get_rect(center=(290, 100))
 
         ekran.blit(new_text,new_text_rect)
         pygame.display.update()
@@ -95,7 +95,7 @@ def main_menu():
         a , b  = pygame.mouse.get_pos()
         BackGround = Background('arkaplanmenu.jpg', [0,0])
         ekran.blit(BackGround.image, BackGround.rect)
-        yazi_yaz('Adınızı giriniz: ', font , (255,25,25),ekran, 275 , 75)
+        yazi_yaz('Adınızı giriniz: ', font , (255,25,25),ekran, 140 , 45)
 
         surf1 =font.render('ÇIK', True , 'white')
         surf2 = font.render('BAŞLA',True , 'white')
