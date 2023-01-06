@@ -1,37 +1,67 @@
-import pygame 
-import sys
-import pygame_gui
+import pygame ,sys, pygame_gui
 from pygame.locals import * 
-from subprocess import call
 import pygame as pg 
+
+
 pygame.init()
 
+# ekran ayalarma
 en , boy = 1000 ,  700 
 ekran =pygame.display.set_mode((en, boy ))
-pygame.display.set_caption('text inputlama')
+
+# ekran ismi (pencere ismi)
+pygame.display.set_caption('Final Projesi')
+
+# icon ayarlama
+
+
+
+# yazi tipi ayarlama
+
 font =pygame.font.Font("font.ttf" , 20)
 
+#MANAGERS
 voltaj1= pygame_gui.UIManager((en , boy ))
 direnc1 = pygame_gui.UIManager((en , boy ))
 MANAGER = pygame_gui.UIManager((en , boy ))
+voltajbul = pygame_gui.UIManager((en,boy))
+voltajmanager = pygame_gui.UIManager((en,boy))
+direncvoltaji =pygame_gui.UIManager((en,boy))
+direncakimi= pygame_gui.UIManager((en,boy))
+
+# CLOCK
 mainClock= pygame.time.Clock()
 UI_REFRESH_RATE= mainClock.tick(60)/1000
-TEXT_INPUT= pygame_gui.elements.UITextEntryLine(relative_rect=pygame.Rect((275,100 ), (500,50)), manager=MANAGER, 
-                                                        object_id='#main_text_entry'  )
+
+
+# input yerleri
+
+TEXT_INPUT= pygame_gui.elements.UITextEntryLine(relative_rect=pygame.Rect((275,100 ), (500,50)), manager=MANAGER,  object_id='#main_text_entry'  )
+
+# akımı heplarken kullanılanlar:                                            
 direnc_input= pygame_gui.elements.UITextEntryLine(relative_rect=pygame.Rect((400,60),(200,50)), manager=direnc1, object_id='#giris')
+
 voltaj_input = pygame_gui.elements.UITextEntryLine(relative_rect=pygame.Rect((400,60), (200,50)),manager=voltaj1, object_id='#voltaj')
 
+#voltaj hesaplarken kullanılanlar:
+akim_direce = pygame_gui.elements.UITextEntryLine(relative_rect=pygame.Rect((400,60),(200,50)),manager=voltajbul,object_id='#voltajibul')
 
+voltajdaki_akim = pygame_gui.elements.UITextEntryLine(relative_rect=pygame.Rect((400,60),(200,50)),manager=voltajmanager,object_id='#yuhbe')
+#direnc hesaplanırken kullanılanlar:
+
+direncteki_voltaj = pygame_gui.elements.UITextEntryLine(relative_rect=pygame.Rect((400,60),(200,50)),manager= direncvoltaji, object_id='#direnctekivoltaj')
+
+direncteki_akim = pygame_gui.elements.UITextEntryLine(relative_rect=pygame.Rect((400,60),(200,50)),manager=direncakimi , object_id='#direnctekiakim')
 
 
 
 class Background(pg.sprite.Sprite):
+
     def __init__(self, image_file, location):
         pg.sprite.Sprite.__init__(self)  
         self.image = pg.image.load(image_file)
         self.rect = self.image.get_rect()
         self.rect.left, self.rect.top = location
-
 
 
 def show_user_name(user_name):
@@ -72,7 +102,7 @@ def show_user_name(user_name):
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if button_1.collidepoint(event.pos):
-                    game()    
+                    arayuz() 
 
 
 
@@ -99,18 +129,11 @@ def show_user_name(user_name):
         mainClock.tick(60)
 
 
-
-
-
-
 def yazi_yaz(yazi , font , renk , surface ,x , y ):
     textobj= font.render(yazi, 1 ,renk  )
     textrect = textobj.get_rect()
     textrect.topleft = (x,y)
     surface.blit(textobj, textrect)
-
-
-
 
 
 def main_menu():
@@ -153,8 +176,7 @@ def main_menu():
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if button_1.collidepoint(event.pos):
-
-                    game()    
+                   arayuz() 
             if (event.type == pygame_gui.UI_TEXT_ENTRY_FINISHED and event.ui_object_id == '#main_text_entry'):
                 show_user_name(event.text)
             MANAGER.process_events(event)
@@ -185,16 +207,78 @@ def main_menu():
         mainClock.tick(60)
         MANAGER.update(UI_REFRESH_RATE)
 
+def arayuz():
+
+    kos= True
+    while kos:
+        ekran.fill((52,85,78))
+
+        font_esc =pygame.font.Font("font.ttf" , 10)
 
 
+        yazi_yaz("GERİ GİTMEK İÇİN: ESC BASINIZ", font_esc,(255,0,0),ekran,20,20)
+        yazi_yaz("YAPMAK İSTEDİĞİNİZ İŞLEMİ SEÇİNİZ:",font , (255,255,255),ekran,150,300)
 
+        (mx , my) = pygame.mouse.get_pos()
+
+        surf_voltaj =font.render('VOLTAJ', True , 'white')
+        surf_akim =font.render('AKIM', True , 'white')
+        surf_direnc = font.render('DİRENÇ',True,'white')
+
+        button_voltaj= pygame.Rect(150,350,150,100)
+        button_akim=pygame.Rect(400,350,150,100)
+        button_direnc=pygame.Rect(650,350,150,100)
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                kos = False
+
+            if event.type == pygame.KEYDOWN:
+                if event.key == K_ESCAPE:
+                    main_menu()
+
+            if event.type ==pygame.MOUSEBUTTONDOWN:
+                if button_akim.collidepoint(event.pos):
+                    game()
+
+                if button_voltaj.collidepoint(event.pos):
+                    akimdan_diren()
+
+                if button_direnc.collidepoint(event.pos):
+                        direncin_1_loop()
+
+                  
+        if button_akim.x <= mx  <= button_akim.x + 150   and button_akim.y <= my <= button_akim.y + 100:
+            pygame.draw.rect(ekran,(255,0,0),button_akim)
+        else:
+            pygame.draw.rect(ekran ,(200,110,110),button_akim)
+        ekran.blit(surf_akim, (button_akim.x + 40, button_akim.y + 35))
+
+        if button_voltaj.x <= mx <= button_voltaj.x +  150 and button_voltaj.y <= my <= button_voltaj.y + 100:
+            pygame.draw.rect(ekran,(255,0,0),button_voltaj)
+        else:
+            pygame.draw.rect(ekran,(200,110,110),button_voltaj)
+        ekran.blit(surf_voltaj,(button_voltaj.x + 20 , button_voltaj.y + 35))
+
+        if button_direnc.x <= mx <= button_direnc.x + 150 and button_direnc.y <= my <= button_direnc.y + 100:
+            pygame.draw.rect(ekran,(255,0,0),button_direnc)
+        else:
+            pygame.draw.rect(ekran,(200,110,110),button_direnc)
+        ekran.blit(surf_direnc,(button_direnc.x + 20,button_direnc.y + 35))
+
+        pygame.display.update()
+        pygame.display.flip()
+
+
+# game arayüzünü kullanırsak  direnc ve voltajı girip  akımı elde ederiz
+# akımın 1. loopu
 def game():
 
 
 
     a , b = pygame.mouse.get_pos()
 
-    UI_REFRESH_RATE= mainClock.tick(60)/1000
     calis = True
     while calis:
 
@@ -237,9 +321,11 @@ def game():
 
             if event.type == pygame.KEYDOWN:
                 if event.key == K_ESCAPE:
-                    main_menu()
+                    arayuz()
 
             if (event.type == pygame_gui.UI_TEXT_ENTRY_FINISHED and event.ui_object_id == '#giris'):
+                global direnc__
+                direnc__ = (event.text)  
                 direnc(event.text)
             direnc1.process_events(event)
         direnc1.update(UI_REFRESH_RATE)
@@ -251,15 +337,186 @@ def game():
         pygame.display.flip()
         mainClock.tick(60)
 
-
-
-
-
+# akımın 2. loopu
 def direnc(direnc_1):
+
+
 
     a , b = pygame.mouse.get_pos()
     go = True
     while go:
+
+
+        ekran.fill((52,70,100))
+            
+
+        # EKRANDAKİ RESİMLER: 
+        pil_img = pg.image.load('görseller/pil_30.png')
+        direnc_img = pg.image.load('görseller/direnc_11.png')
+        voltmetre_img = pg.image.load("görseller/voltmetre_10.png")
+        ampermetre_img = pg.image.load("görseller/ampermetre_10.png")
+        ampuldevre_img = pg.image.load("görseller/ampul.2.png")
+        devre_img=pg.image.load("görseller/devre1.png")
+
+
+
+        ekran.blit(devre_img,(30,120))
+        ekran.blit(pil_img, (640,220))
+        ekran.blit(direnc_img, (600,595))
+        ekran.blit(voltmetre_img, (600, 250))
+        ekran.blit(ampermetre_img, (340, 590))
+        ekran.blit(ampuldevre_img, (430, 210))
+        siyah = 0,0,0
+
+
+
+        yazi_yaz("Voltaj giriniz: ",font,siyah ,ekran ,100,75,)
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                go= False
+
+            if event.type == pygame.KEYDOWN:
+                if event.key == K_ESCAPE:
+                    game()
+
+            if (event.type == pygame_gui.UI_TEXT_ENTRY_FINISHED and event.ui_object_id == '#voltaj'):
+                  global voltaj__
+                  voltaj__= (event.text)
+                  voltaj(event.text)
+            voltaj1.process_events(event)
+        pygame.display.update
+
+
+
+
+
+        new_text = pygame.font.Font("font.ttf", 20).render(f"Direnç={direnc__}Ω", True, "white")
+        new_text_rect = new_text.get_rect(center=(120, 300))
+        ekran.blit(new_text,new_text_rect)
+
+        
+        voltaj1.draw_ui(ekran)
+        pygame.display.update()
+        pygame.display.flip()
+        mainClock.tick(60)
+        voltaj1.update(UI_REFRESH_RATE)
+
+# akımın 3. loopu
+def voltaj(voltaj_1):
+    running = True
+
+    a , b = pygame.mouse.get_pos()
+    while running:
+        ekran.fill((52,70,100))
+        # EKRANDAKİ RESİMLER: 
+        pil_img = pg.image.load('görseller/pil_30.png')
+        direnc_img = pg.image.load('görseller/direnc_11.png')
+        voltmetre_img = pg.image.load("görseller/voltmetre_10.png")
+        ampermetre_img = pg.image.load("görseller/ampermetre_10.png")
+        ampuldevre_img = pg.image.load("görseller/ampul.2.png")
+        devre_img=pg.image.load("görseller/devre1.png")
+
+
+
+        ekran.blit(devre_img,(30,120))
+        ekran.blit(pil_img, (640,220))
+        ekran.blit(direnc_img, (600,595))
+        ekran.blit(voltmetre_img, (600, 250))
+        ekran.blit(ampermetre_img, (340, 590))
+        ekran.blit(ampuldevre_img, (430, 210))
+        siyah = 0,0,0
+        
+        yazi_yaz(f"Direnç={direnc__}Ω" ,font, (255,255,255) ,ekran ,20,300)
+        yazi_yaz(f"Voltaj={voltaj__}V",font ,(255,255,255),ekran,20 , 350)
+
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                running= False
+
+            if event.type == pygame.KEYDOWN:
+                if event.key == K_ESCAPE:
+                    arayuz()
+
+        akim_degeri = float(voltaj__)/float(direnc__)
+
+        yazi_yaz(f"AKIM: {akim_degeri} AMPER",font ,(255,0,0),ekran,400,100) 
+
+
+        pygame.display.update()
+        pygame.display.flip()
+        mainClock.tick(60)
+
+#voltajın 1. loopu
+def akimdan_diren():
+
+
+
+    a , b = pygame.mouse.get_pos()
+    go = True
+    while go:
+
+
+        ekran.fill((52,70,100))
+            
+
+        # EKRANDAKİ RESİMLER: 
+        pil_img = pg.image.load('görseller/pil_30.png')
+        direnc_img = pg.image.load('görseller/direnc_11.png')
+        voltmetre_img = pg.image.load("görseller/voltmetre_10.png")
+        ampermetre_img = pg.image.load("görseller/ampermetre_10.png")
+        ampuldevre_img = pg.image.load("görseller/ampul.2.png")
+        devre_img=pg.image.load("görseller/devre1.png")
+
+
+
+        ekran.blit(devre_img,(30,120))
+        ekran.blit(pil_img, (640,220))
+        ekran.blit(direnc_img, (600,595))
+        ekran.blit(voltmetre_img, (600, 250))
+        ekran.blit(ampermetre_img, (340, 590))
+        ekran.blit(ampuldevre_img, (430, 210))
+        siyah = 0,0,0
+
+
+
+        yazi_yaz("Direnç giriniz: ",font,siyah ,ekran ,100,75,)
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                go= False
+
+            if event.type == pygame.KEYDOWN:
+                if event.key == K_ESCAPE:
+                    arayuz()
+
+            if (event.type == pygame_gui.UI_TEXT_ENTRY_FINISHED and event.ui_object_id == '#voltajibul'):
+                  global voltaj_hesaplanirken_direnc
+                  voltaj_hesaplanirken_direnc= (event.text)
+                  voltajsonu(event.text)
+            voltajbul.process_events(event)
+        pygame.display.update
+
+
+
+
+
+
+        
+        voltajbul.draw_ui(ekran)
+        pygame.display.update()
+        pygame.display.flip()
+        mainClock.tick(60)
+        voltajbul.update(UI_REFRESH_RATE)
+
+# voltajın 2. loopu
+def voltajsonu(voltajsonu):
+    calis = True
+    while calis:
 
         
 
@@ -284,9 +541,8 @@ def direnc(direnc_1):
         ekran.blit(ampuldevre_img, (430, 210))
         siyah = 0,0,0
 
-        global direnc
-
-        yazi_yaz("Voltaj giriniz: ",font,siyah ,ekran ,100,75,)
+        yazi_yaz(f"Direnç={voltaj_hesaplanirken_direnc} Ω" ,font, (255,255,255) ,ekran ,20,300)
+        yazi_yaz("Akım giriniz: ",font,siyah ,ekran ,100,75,)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -295,30 +551,25 @@ def direnc(direnc_1):
 
             if event.type == pygame.KEYDOWN:
                 if event.key == K_ESCAPE:
-                    game()
+                    arayuz()
+            
 
-            if (event.type == pygame_gui.UI_TEXT_ENTRY_FINISHED and event.ui_object_id == '#voltaj'):
-                voltaj(event.text)
-            voltaj1.process_events(event)
-        voltaj1.update(UI_REFRESH_RATE)
+            if (event.type == pygame_gui.UI_TEXT_ENTRY_FINISHED and event.ui_object_id == '#yuhbe'):
+                  global voltaj_hesaplanirken_akim
+                  voltaj_hesaplanirken_akim= (event.text)
+                  voltaj_hesaplandi(event.text)
+            voltajmanager.process_events(event)
         pygame.display.update
 
 
-
-
-
-        new_text = pygame.font.Font("font.ttf", 20).render(f"Direnç={direnc_1}", True, "white")
-        new_text_rect = new_text.get_rect(center=(120, 300))
-        ekran.blit(new_text,new_text_rect)
-        pygame.display.update()
-        
-        voltaj1.draw_ui(ekran)
+        voltajmanager.draw_ui(ekran)
         pygame.display.update()
         pygame.display.flip()
         mainClock.tick(60)
+        voltajmanager.update(UI_REFRESH_RATE)
 
-
-def voltaj(voltaj_1):
+# voltajın 3. loopu
+def voltaj_hesaplandi(voltajhesaplandi):
     running = True
 
     a , b = pygame.mouse.get_pos()
@@ -341,11 +592,10 @@ def voltaj(voltaj_1):
         ekran.blit(ampermetre_img, (340, 590))
         ekran.blit(ampuldevre_img, (430, 210))
         siyah = 0,0,0
+        
+        yazi_yaz(f"Direnç={voltaj_hesaplanirken_direnc} Ω" ,font, (255,255,255) ,ekran ,20,300)
+        yazi_yaz(f"Akım={voltaj_hesaplanirken_akim} A",font ,(255,255,255),ekran,20 , 350)
 
-        yazi_yaz(f"Direnç=" ,font, (255,255,255) ,ekran ,20,300)
-        new_text = pygame.font.Font("font.ttf", 20).render(f"Voltaj={voltaj_1}", True, "white")
-        new_text_rect = new_text.get_rect(center=(120, 350))
-        ekran.blit(new_text,new_text_rect)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -354,12 +604,178 @@ def voltaj(voltaj_1):
 
             if event.type == pygame.KEYDOWN:
                 if event.key == K_ESCAPE:
-                    direnc()
+                    arayuz()
 
+        voltaj_degeri= float(voltaj_hesaplanirken_akim)* float(voltaj_hesaplanirken_direnc)
 
+        yazi_yaz(f"VOLTAJ: {voltaj_degeri} VOLT",font ,(255,0,0),ekran,400,100) 
 
 
         pygame.display.update()
         pygame.display.flip()
         mainClock.tick(60)
+
+# direncin 1. loopu
+def direncin_1_loop():
+    
+    a , b = pygame.mouse.get_pos()
+
+    calis = True
+    while calis:
+
+        
+
+        ekran.fill((52,70,100))
+            
+
+        # EKRANDAKİ RESİMLER: 
+        pil_img = pg.image.load('görseller/pil_30.png')
+        direnc_img = pg.image.load('görseller/direnc_11.png')
+        voltmetre_img = pg.image.load("görseller/voltmetre_10.png")
+        ampermetre_img = pg.image.load("görseller/ampermetre_10.png")
+        ampuldevre_img = pg.image.load("görseller/ampul.2.png")
+        devre_img=pg.image.load("görseller/devre1.png")
+
+
+
+        ekran.blit(devre_img,(30,120))
+        ekran.blit(pil_img, (640,220))
+        ekran.blit(direnc_img, (600,595))
+        ekran.blit(voltmetre_img, (600, 250))
+        ekran.blit(ampermetre_img, (340, 590))
+        ekran.blit(ampuldevre_img, (430, 210))
+        siyah = 0,0,0
+
+        # yazi_yaz("Voltaj =",font,siyah, ekran, 100,55,)# ikinci slota yazılanlar ekranda gözükecektir
+        # yazi_yaz("Amper =",font,siyah ,ekran , 100,105,)
+        yazi_yaz("Voltaj giriniz:",font,siyah ,ekran ,100,75,)
+
+
+
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                calis = False
+
+            if event.type == pygame.KEYDOWN:
+                if event.key == K_ESCAPE:
+                    arayuz()
+
+            if (event.type == pygame_gui.UI_TEXT_ENTRY_FINISHED and event.ui_object_id == '#direnctekivoltaj'):
+                global direnc_hesaplarken_voltaj
+                direnc_hesaplarken_voltaj = (event.text)  
+                direncin_2_loop(event.text)
+            direncvoltaji.process_events(event)
+        direncvoltaji.update(UI_REFRESH_RATE)
+
+
+
+        direncvoltaji.draw_ui(ekran)
+        pygame.display.update()
+        pygame.display.flip()
+        mainClock.tick(60)
+
+def direncin_2_loop(direncloop2):
+    calis = True
+    while calis:
+
+        
+
+        ekran.fill((52,70,100))
+            
+
+        # EKRANDAKİ RESİMLER: 
+        pil_img = pg.image.load('görseller/pil_30.png')
+        direnc_img = pg.image.load('görseller/direnc_11.png')
+        voltmetre_img = pg.image.load("görseller/voltmetre_10.png")
+        ampermetre_img = pg.image.load("görseller/ampermetre_10.png")
+        ampuldevre_img = pg.image.load("görseller/ampul.2.png")
+        devre_img=pg.image.load("görseller/devre1.png")
+
+
+
+        ekran.blit(devre_img,(30,120))
+        ekran.blit(pil_img, (640,220))
+        ekran.blit(direnc_img, (600,595))
+        ekran.blit(voltmetre_img, (600, 250))
+        ekran.blit(ampermetre_img, (340, 590))
+        ekran.blit(ampuldevre_img, (430, 210))
+        siyah = 0,0,0
+
+        yazi_yaz(f"Voltaj={direnc_hesaplarken_voltaj}V" ,font, (255,255,255) ,ekran ,20,300)
+        yazi_yaz("Akım giriniz:",font,siyah ,ekran ,100,75,)
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                go= False
+
+            if event.type == pygame.KEYDOWN:
+                if event.key == K_ESCAPE:
+                    arayuz()
+
+
+            if (event.type == pygame_gui.UI_TEXT_ENTRY_FINISHED and event.ui_object_id == '#direnctekiakim'):
+                  global direnc_hesaplanrken_akim
+                  direnc_hesaplanrken_akim= (event.text)
+                  direnc_3_loop(event.text)
+            direncakimi.process_events(event)
+        pygame.display.update
+
+
+        direncakimi.draw_ui(ekran)
+        pygame.display.update()
+        pygame.display.flip()
+        mainClock.tick(60)
+        direncakimi.update(UI_REFRESH_RATE)
+
+
+
+def direnc_3_loop(direncloop3):
+    running = True
+
+    a , b = pygame.mouse.get_pos()
+    while running:
+        ekran.fill((52,70,100))
+        # EKRANDAKİ RESİMLER: 
+        pil_img = pg.image.load('görseller/pil_30.png')
+        direnc_img = pg.image.load('görseller/direnc_11.png')
+        voltmetre_img = pg.image.load("görseller/voltmetre_10.png")
+        ampermetre_img = pg.image.load("görseller/ampermetre_10.png")
+        ampuldevre_img = pg.image.load("görseller/ampul.2.png")
+        devre_img=pg.image.load("görseller/devre1.png")
+
+
+
+        ekran.blit(devre_img,(30,120))
+        ekran.blit(pil_img, (640,220))
+        ekran.blit(direnc_img, (600,595))
+        ekran.blit(voltmetre_img, (600, 250))
+        ekran.blit(ampermetre_img, (340, 590))
+        ekran.blit(ampuldevre_img, (430, 210))
+        siyah = 0,0,0
+        
+        yazi_yaz(f"Voltaj={direnc_hesaplarken_voltaj} V" ,font, (255,255,255) ,ekran ,20,300)
+        yazi_yaz(f"Akım={direnc_hesaplanrken_akim} A",font ,(255,255,255),ekran,20 , 350)
+
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                running= False
+
+            if event.type == pygame.KEYDOWN:
+                if event.key == K_ESCAPE:
+                    arayuz()
+
+        direnc_degeri= float(direnc_hesaplarken_voltaj)/ float(direnc_hesaplanrken_akim)
+
+        yazi_yaz(f"DİRENÇ: {direnc_degeri} Ω",font ,(255,0,0),ekran,400,100) 
+
+
+        pygame.display.update()
+        pygame.display.flip()
+        mainClock.tick(60)
+
 main_menu()
