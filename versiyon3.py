@@ -65,22 +65,23 @@ class Background(pg.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.left, self.rect.top = location
 
-#kullanıcı ismi ekleme kısmı 
+
 def show_user_name(user_name):
 
-    #ekran en boy renk ayarı        
+
+        
     run = True 
     ekran_renk = 50,0,50
     en , boy = 564 ,  650 
     ekran =pygame.display.set_mode((en, boy ))
     while run:
- 
-        #arkaplan resminin belirlendiği kod
+        
+        #ekran.fill((ekran_renk))
+
         a , b  = pygame.mouse.get_pos()
         BackGround = Background('görseller/arkaplanmenu.jpg', [0,0])
         ekran.blit(BackGround.image, BackGround.rect)
 
-        #kullanıcı ismi alınırken kullannılan butonların kordinatlari 
         surf1 =font.render('ÇIK', True , 'white')
         surf2 = font.render('BAŞLA',True , 'white')
         button_1 = pygame.Rect(190,300,200,100)
@@ -90,7 +91,7 @@ def show_user_name(user_name):
             if event.type == pygame.QUIT:
                 pygame.quit()
                 run = False
-           #klavye tuşlarının görevlerinin atanması
+
             if event.type == pygame.KEYDOWN:
                 if event.key == K_ESCAPE:
                     pygame.quit()
@@ -104,10 +105,9 @@ def show_user_name(user_name):
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if button_1.collidepoint(event.pos):
                     arayuz() 
-                 
 
-        #mouse pozisyonuna bağlı olarak buton renginin değişmesi 
-        
+
+
         if button_1.x <= a <= button_1.x +200 and button_1.y <= b <= button_1.y +100:
             pygame.draw.rect(ekran,(38, 140, 7),button_1)
         else:
@@ -127,10 +127,11 @@ def show_user_name(user_name):
         ekran.blit(new_text,new_text_rect)
         pygame.display.update()
 
-        #ekran yenileme hızı 
+        
+
         mainClock.tick(60)
 
-# ekrana yazı yazmak için gerekli kod kısmı 
+
 def yazi_yaz(yazi , font , renk , surface ,x , y ):
     textobj= font.render(yazi, 1 ,renk  )
     textrect = textobj.get_rect()
@@ -138,7 +139,6 @@ def yazi_yaz(yazi , font , renk , surface ,x , y ):
     surface.blit(textobj, textrect)
 
 
-#ana menü ayarlarının yapılması 
 def main_menu():
     run = True 
     ekran_renk = 50,0,50
@@ -149,19 +149,15 @@ def main_menu():
 
     while run:
 
-        #menü arkaplanının ayarlanması 
+        #ekran.fill((ekran_renk))
         BackGround = Background('görseller/arkaplanmenu.jpg', [0,0])
         ekran.blit(BackGround.image, BackGround.rect)
-        
-        
-        # kullanıcı isminin yazıldığı bosluğu tanımlama 
+
         yazi_yaz('Adınızı giriniz: ', font , (255,25,25),ekran, 140 , 45)
 
-        
-       #mouse pozisyonu alma 
         a , b  = pygame.mouse.get_pos()
                 
-        #menü butolarının kordinatlaının belirlenmesi 
+
         surf1 =font.render('ÇIK', True , 'white')
         surf2 = font.render('BAŞLA',True , 'white')
         button_1 = pygame.Rect(190,300,200,100)
@@ -174,7 +170,7 @@ def main_menu():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 run = False
-        #klavye tuşlarının görevlerinin atanması 
+
             if event.type == pygame.KEYDOWN:
                 if event.key == K_ESCAPE:
                     pygame.quit()
@@ -194,7 +190,8 @@ def main_menu():
 
 
 
-        #mouse pozisyonuna bağlı olarak buton renginin değişmesi 
+
+
 
         if button_1.x <= a <= button_1.x +200 and button_1.y <= b <= button_1.y +100:
             pygame.draw.rect(ekran,(38, 140, 7),button_1)
@@ -212,35 +209,30 @@ def main_menu():
 
 
         MANAGER.draw_ui(ekran)
-        print(a,b)
         pygame.display.update()
         mainClock.tick(60)
         MANAGER.update(UI_REFRESH_RATE)
-        
-#bulunması istenen elemanın seçildiği kod 
+
 def arayuz():
+
     kos= True
-    # en boy ayarı
     en,boy = 1000 ,700
     ekran =pygame.display.set_mode((en, boy ))
     while kos:
-        
-        # ekran renginin ayarlanması
         ekran.fill((44, 143, 163))
-        #yazı tipi tanımlama 
+        
         font_esc =pygame.font.Font("font.ttf" , 10)
-     
-        #talimatları ekrana yazma
+
+
         yazi_yaz("GERİ GİTMEK İÇİN: ESC BASINIZ", font_esc,(255,0,0),ekran,20,20)
         yazi_yaz("BULMAK İSTEDİĞİNİZ ELEMANI SEÇİNİZ:",font , (255,255,255),ekran,140,300)
 
         (mx , my) = pygame.mouse.get_pos()
-        #ekrandaki butonarın e işe yaradığı
+
         surf_voltaj =font.render('VOLT', True , 'white')
         surf_akim =font.render('AKIM', True , 'white')
         surf_direnc = font.render('DİRENÇ',True,'white')
 
-         # ekrandaki butonların kordinatlarının ayralanması 
         button_voltaj= pygame.Rect(150,350,150,100)
         button_akim=pygame.Rect(400,350,150,100)
         button_direnc=pygame.Rect(650,350,150,100)
@@ -249,13 +241,11 @@ def arayuz():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 kos = False
-                
-        #klavye tuşlarının görevlerinin atanması 
+
             if event.type == pygame.KEYDOWN:
                 if event.key == K_ESCAPE:
                     main_menu()
-            
-            
+
             if event.type ==pygame.MOUSEBUTTONDOWN:
                 if button_akim.collidepoint(event.pos):
                     game()
@@ -266,9 +256,7 @@ def arayuz():
                 if button_direnc.collidepoint(event.pos):
                         direncin_1_loop()
 
-                    
-                    
-        #mouse pozisyonuna bağlı olarak buton renginin değişmesi       
+                  
         if button_akim.x <= mx  <= button_akim.x + 150   and button_akim.y <= my <= button_akim.y + 100:
             pygame.draw.rect(ekran,(38, 140, 7),button_akim)
         else:
@@ -294,7 +282,6 @@ def arayuz():
 # game arayüzünü kullanırsak  direnc ve voltajı girip  akımı elde ederiz
 # akımın 1. loopu
 def game():
-    #en boy ayarları 
     en,boy = 1000 ,700
     ekran =pygame.display.set_mode((en, boy ))
 
@@ -305,10 +292,10 @@ def game():
     while calis:
 
         
-        # ekran renginin ayarı 
+
         ekran.fill((54, 128, 247))
             
-        #kullanılan resimlerin sistem tarafından aktive edilmesi 
+
         # EKRANDAKİ RESİMLER: 
         pil_img = pg.image.load('görseller/pil_30.png')
         direnc_img = pg.image.load('görseller/direnc_11.png')
@@ -317,7 +304,8 @@ def game():
         ampuldevre_img = pg.image.load("görseller/ampul.png")
         devre_img=pg.image.load("görseller/devre1.png")
 
-
+        font2 = pygame.font.Font("font.ttf",15)
+        yazi_yaz ("MENÜYE DÖNMEK İÇİN ESC TUŞUNA BASINIZ!", font2, (255,255,50),ekran , 10 , 20)
 
         ekran.blit(devre_img,(260,220))
         ekran.blit(pil_img, (600,480))
@@ -327,7 +315,8 @@ def game():
         ekran.blit(ampuldevre_img, (430, 190))
         siyah = 0,0,0
 
-
+        # yazi_yaz("Voltaj =",font,siyah, ekran, 100,55,)# ikinci slota yazılanlar ekranda gözükecektir
+        # yazi_yaz("Amper =",font,siyah ,ekran , 100,105,)
         yazi_yaz("Direnç giriniz: ",font,siyah ,ekran ,100,75,)
 
 
@@ -339,7 +328,7 @@ def game():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 calis = False
-        #klavye tuşlarının görevlerinin atanması
+
             if event.type == pygame.KEYDOWN:
                 if event.key == K_ESCAPE:
                     arayuz()
@@ -361,14 +350,14 @@ def game():
 # akımın 2. loopu
 def direnc(direnc_1):
 
-    # en boy ayarı 
+
     en,boy = 1000 ,700
     ekran =pygame.display.set_mode((en, boy ))
     a , b = pygame.mouse.get_pos()
     go = True
     while go:
 
-          # ekran renginin ayralanması 
+
         ekran.fill((54, 128, 247))
             
 
@@ -380,8 +369,9 @@ def direnc(direnc_1):
         ampuldevre_img = pg.image.load("görseller/ampul.png")
         devre_img=pg.image.load("görseller/devre1.png")
 
+        font2 = pygame.font.Font("font.ttf",15)
+        yazi_yaz ("MENÜYE DÖNMEK İÇİN ESC TUŞUNA BASINIZ!", font2, (255,255,50),ekran , 10 , 20)
 
-        #kullanılan resimleri sistem tarafından aktive edilmesi 
         ekran.blit(devre_img,(260,220))
         ekran.blit(pil_img, (600,480))
         ekran.blit(direnc_img, (600,270))
@@ -391,14 +381,14 @@ def direnc(direnc_1):
         siyah = 0,0,0
 
 
-        # hangi değerin girileceğinin belirtilmesi 
+
         yazi_yaz("Voltaj giriniz: ",font,siyah ,ekran ,100,75,)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 go= False
-        # klavye tuşlarının görevlerinin atanması
+
             if event.type == pygame.KEYDOWN:
                 if event.key == K_ESCAPE:
                     game()
@@ -428,12 +418,10 @@ def direnc(direnc_1):
 # akımın 3. loopu
 def voltaj(voltaj_1):
     running = True
-    #ekran  boyutunun ayarlanması
     en,boy = 1000 ,700
     ekran =pygame.display.set_mode((en, boy ))
     a , b = pygame.mouse.get_pos()
     while running:
-        #ekran renginin ayarlanması 
         ekran.fill((54, 128, 247))
         # EKRANDAKİ RESİMLER: 
         pil_img = pg.image.load('görseller/pil_30.png')
@@ -443,8 +431,9 @@ def voltaj(voltaj_1):
         ampuldevre_img = pg.image.load("görseller/ampul.png")
         devre_img=pg.image.load("görseller/devre1.png")
 
+        font2 = pygame.font.Font("font.ttf",15)
+        yazi_yaz ("MENÜYE DÖNMEK İÇİN ESC TUŞUNA BASINIZ!", font2, (255,255,50),ekran , 10 , 20)
 
-         #kullanılan resimleri sistem tarafından aktive edilmesi 
         ekran.blit(devre_img,(260,220))
         ekran.blit(pil_img, (600,480))
         ekran.blit(direnc_img, (600,270))
@@ -452,7 +441,7 @@ def voltaj(voltaj_1):
         ekran.blit(ampermetre_img, (380, 475))
         ekran.blit(ampuldevre_img, (430, 190))
         siyah = 0,0,0
-       # girilen değerlerin ekrana yazılması  
+        
         yazi_yaz(f"Direnç={direnc__}Ω" ,font, (255,255,255) ,ekran ,20,300)
         yazi_yaz(f"Voltaj={voltaj__}V",font ,(255,255,255),ekran,20 , 350)
 
@@ -465,12 +454,11 @@ def voltaj(voltaj_1):
             if event.type == pygame.KEYDOWN:
                 if event.key == K_ESCAPE:
                     arayuz()
-        if voltaj__ == float and direnc__ == float :
-            akim_degeri = float(voltaj__)/float(direnc__)
 
-            yazi_yaz(f"★AKIM:{akim_degeri} AMPER★",font ,(77, 237, 52),ekran,5,400) 
-        else:
-            deger_giriniz()
+        akim_degeri = float(voltaj__)/float(direnc__)
+
+        yazi_yaz(f"★AKIM:{akim_degeri} AMPER★",font ,(77, 237, 52),ekran,300,100) 
+
 
         pygame.display.update()
         pygame.display.flip()
@@ -498,7 +486,8 @@ def akimdan_diren():
         ampuldevre_img = pg.image.load("görseller/ampul.png")
         devre_img=pg.image.load("görseller/devre1.png")
 
-
+        font2 = pygame.font.Font("font.ttf",15)
+        yazi_yaz ("MENÜYE DÖNMEK İÇİN ESC TUŞUNA BASINIZ!", font2, (255,255,50),ekran , 10 , 20)
 
         ekran.blit(devre_img,(260,220))
         ekran.blit(pil_img, (600,480))
@@ -560,7 +549,8 @@ def voltajsonu(voltajsonu):
         ampuldevre_img = pg.image.load("görseller/ampul.png")
         devre_img=pg.image.load("görseller/devre1.png")
 
-
+        font2 = pygame.font.Font("font.ttf",15)
+        yazi_yaz ("MENÜYE DÖNMEK İÇİN ESC TUŞUNA BASINIZ!", font2, (255,255,50),ekran , 10 , 20)
 
         ekran.blit(devre_img,(260,220))
         ekran.blit(pil_img, (600,480))
@@ -613,7 +603,8 @@ def voltaj_hesaplandi(voltajhesaplandi):
         ampuldevre_img = pg.image.load("görseller/ampul.png")
         devre_img=pg.image.load("görseller/devre1.png")
 
-
+        font2 = pygame.font.Font("font.ttf",15)
+        yazi_yaz ("MENÜYE DÖNMEK İÇİN ESC TUŞUNA BASINIZ!", font2, (255,255,50),ekran , 10 , 20)
 
         ekran.blit(devre_img,(260,220))
         ekran.blit(pil_img, (600,480))
@@ -635,12 +626,11 @@ def voltaj_hesaplandi(voltajhesaplandi):
             if event.type == pygame.KEYDOWN:
                 if event.key == K_ESCAPE:
                     arayuz()
-        if voltaj_hesaplanirken_akim == float and voltaj_hesaplanirken_direnc == float:
-            voltaj_degeri= float(voltaj_hesaplanirken_akim)* float(voltaj_hesaplanirken_direnc)
 
-            yazi_yaz(f"★VOLTAJ:{voltaj_degeri} VOLT★",font ,(77, 237, 52),ekran,5,400) 
-        else : 
-            deger_giriniz()
+        voltaj_degeri= float(voltaj_hesaplanirken_akim)* float(voltaj_hesaplanirken_direnc)
+
+        yazi_yaz(f"★VOLTAJ:{voltaj_degeri} VOLT★",font ,(77, 237, 52),ekran,300,100) 
+
 
         pygame.display.update()
         pygame.display.flip()
@@ -668,7 +658,8 @@ def direncin_1_loop():
         ampuldevre_img = pg.image.load("görseller/ampul.png")
         devre_img=pg.image.load("görseller/devre1.png")
 
-
+        font2 = pygame.font.Font("font.ttf",15)
+        yazi_yaz ("MENÜYE DÖNMEK İÇİN ESC TUŞUNA BASINIZ!", font2, (255,255,50),ekran , 10 , 20)
 
         ekran.blit(devre_img,(260,220))
         ekran.blit(pil_img, (600,480))
@@ -707,7 +698,7 @@ def direncin_1_loop():
         pygame.display.update()
         pygame.display.flip()
         mainClock.tick(60)
-#direncin 2. loopu 
+
 def direncin_2_loop(direncloop2):
     calis = True
     en,boy = 1000 ,700
@@ -727,7 +718,8 @@ def direncin_2_loop(direncloop2):
         ampuldevre_img = pg.image.load("görseller/ampul.png")
         devre_img=pg.image.load("görseller/devre1.png")
 
-
+        font2 = pygame.font.Font("font.ttf",15)
+        yazi_yaz ("MENÜYE DÖNMEK İÇİN ESC TUŞUNA BASINIZ!", font2, (255,255,50),ekran , 10 , 20)
 
         ekran.blit(devre_img,(260,220))
         ekran.blit(pil_img, (600,480))
@@ -765,7 +757,7 @@ def direncin_2_loop(direncloop2):
         direncakimi.update(UI_REFRESH_RATE)
 
 
-# direncin 3. loopu 
+
 def direnc_3_loop(direncloop3):
     running = True
     en,boy = 1000 ,700
@@ -781,7 +773,8 @@ def direnc_3_loop(direncloop3):
         ampuldevre_img = pg.image.load("görseller/ampul.png")
         devre_img=pg.image.load("görseller/devre1.png")
 
-
+        font2 = pygame.font.Font("font.ttf",15)
+        yazi_yaz ("MENÜYE DÖNMEK İÇİN ESC TUŞUNA BASINIZ!", font2, (255,255,50),ekran , 10 , 20)
 
         ekran.blit(devre_img,(260,220))
         ekran.blit(pil_img, (600,480))
@@ -803,39 +796,17 @@ def direnc_3_loop(direncloop3):
             if event.type == pygame.KEYDOWN:
                 if event.key == K_ESCAPE:
                     arayuz()
-                    
-        if  direnc_hesaplanrken_akim == float and  direnc_hesaplarken_voltaj == float:
-            direnc_degeri= float(direnc_hesaplarken_voltaj)/ float(direnc_hesaplanrken_akim)
-            yazi_yaz(f"★DİRENÇ:{direnc_degeri} Ω★",font ,(77, 237, 52),ekran,5,400) 
-        else :
-            deger_giriniz()
+
+
+
+        direnc_degeri= float(direnc_hesaplarken_voltaj)/ float(direnc_hesaplanrken_akim)
+        yazi_yaz(f"★DİRENÇ:{direnc_degeri} Ω★",font ,(77, 237, 52),ekran,300,100) 
 
         pygame.display.update()
+
         pygame.display.flip()
         mainClock.tick(60)
 
-def deger_giriniz():
 
-
-    run  = True 
-    while run:
-
-        ekran.fill((54, 128, 247))
-
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                running= False
-
-            if event.type == pygame.KEYDOWN:
-                if event.key == K_ESCAPE:
-                    arayuz()
-        font1 = pygame.font.Font("font.ttf", 20)
-        font2 = pygame.font.Font("font.ttf",15)
-        yazi_yaz ("LÜTFEN SAYISAL DEĞER GİRİNİZ",font1, (255,0,0), ekran , 250,300)
-        yazi_yaz ("MENÜYE DÖNMEK İÇİN ESC TUŞUNA BASINIZ!", font2, (255,255,50),ekran , 10 , 20)
-        pygame.display.update()
-        pygame.display.flip()
-        mainClock.tick(60)
 
 main_menu()
