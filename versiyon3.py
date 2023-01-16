@@ -804,7 +804,7 @@ def direnc_3_loop(direncloop3):
                 if event.key == K_ESCAPE:
                     arayuz()
                     
-        if  direnc_hesaplanrken_akim == float and  direnc_hesaplanrken_akim == float:
+        if  direnc_hesaplanrken_akim == float and  direnc_hesaplarken_voltaj == float:
             direnc_degeri= float(direnc_hesaplarken_voltaj)/ float(direnc_hesaplanrken_akim)
             yazi_yaz(f"★DİRENÇ:{direnc_degeri} Ω★",font ,(77, 237, 52),ekran,5,400) 
         else :
