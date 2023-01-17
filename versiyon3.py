@@ -267,7 +267,7 @@ def arayuz():
             pygame.draw.rect(ekran,(38, 140, 7),button_voltaj)
         else:
             pygame.draw.rect(ekran,(255,0,0),button_voltaj)
-        ekran.blit(surf_voltaj,(button_voltaj.x + 20 , button_voltaj.y + 35))
+        ekran.blit(surf_voltaj,(button_voltaj.x + 40 , button_voltaj.y + 35))
 
         if button_direnc.x <= mx <= button_direnc.x + 150 and button_direnc.y <= my <= button_direnc.y + 100:
             pygame.draw.rect(ekran,(38, 140, 7),button_direnc)
@@ -302,7 +302,7 @@ def game():
         voltmetre_img = pg.image.load("görseller/voltmetre_10.png")
         ampermetre_img = pg.image.load("görseller/ampermetre_10.png")
         ampuldevre_img = pg.image.load("görseller/ampul.png")
-        devre_img=pg.image.load("görseller/devre1.png")
+        devre_img=pg.image.load("görseller/devre1v.png")
 
         font2 = pygame.font.Font("font.ttf",15)
         yazi_yaz ("MENÜYE DÖNMEK İÇİN ESC TUŞUNA BASINIZ!", font2, (255,255,50),ekran , 10 , 20)
@@ -367,7 +367,7 @@ def direnc(direnc_1):
         voltmetre_img = pg.image.load("görseller/voltmetre_10.png")
         ampermetre_img = pg.image.load("görseller/ampermetre_10.png")
         ampuldevre_img = pg.image.load("görseller/ampul.png")
-        devre_img=pg.image.load("görseller/devre1.png")
+        devre_img=pg.image.load("görseller/devre1v.png")
 
         font2 = pygame.font.Font("font.ttf",15)
         yazi_yaz ("MENÜYE DÖNMEK İÇİN ESC TUŞUNA BASINIZ!", font2, (255,255,50),ekran , 10 , 20)
@@ -428,7 +428,7 @@ def voltaj(voltaj_1):
         direnc_img = pg.image.load('görseller/direnc_11.png')
         voltmetre_img = pg.image.load("görseller/voltmetre_10.png")
         ampermetre_img = pg.image.load("görseller/ampermetre_10.png")
-        ampuldevre_img = pg.image.load("görseller/ampul.png")
+        ampuldevre_img = pg.image.load("görseller/ampul1.png")
         devre_img=pg.image.load("görseller/devre1.png")
 
         font2 = pygame.font.Font("font.ttf",15)
@@ -439,7 +439,7 @@ def voltaj(voltaj_1):
         ekran.blit(direnc_img, (600,270))
         ekran.blit(voltmetre_img, (560, 505))
         ekran.blit(ampermetre_img, (380, 475))
-        ekran.blit(ampuldevre_img, (430, 190))
+        ekran.blit(ampuldevre_img, (400, 150))
         siyah = 0,0,0
         
         yazi_yaz(f"Direnç={direnc__}Ω" ,font, (255,255,255) ,ekran ,20,300)
@@ -484,7 +484,7 @@ def akimdan_diren():
         voltmetre_img = pg.image.load("görseller/voltmetre_10.png")
         ampermetre_img = pg.image.load("görseller/ampermetre_10.png")
         ampuldevre_img = pg.image.load("görseller/ampul.png")
-        devre_img=pg.image.load("görseller/devre1.png")
+        devre_img=pg.image.load("görseller/devre1v.png")
 
         font2 = pygame.font.Font("font.ttf",15)
         yazi_yaz ("MENÜYE DÖNMEK İÇİN ESC TUŞUNA BASINIZ!", font2, (255,255,50),ekran , 10 , 20)
@@ -547,7 +547,7 @@ def voltajsonu(voltajsonu):
         voltmetre_img = pg.image.load("görseller/voltmetre_10.png")
         ampermetre_img = pg.image.load("görseller/ampermetre_10.png")
         ampuldevre_img = pg.image.load("görseller/ampul.png")
-        devre_img=pg.image.load("görseller/devre1.png")
+        devre_img=pg.image.load("görseller/devre1v.png")
 
         font2 = pygame.font.Font("font.ttf",15)
         yazi_yaz ("MENÜYE DÖNMEK İÇİN ESC TUŞUNA BASINIZ!", font2, (255,255,50),ekran , 10 , 20)
@@ -600,7 +600,7 @@ def voltaj_hesaplandi(voltajhesaplandi):
         direnc_img = pg.image.load('görseller/direnc_11.png')
         voltmetre_img = pg.image.load("görseller/voltmetre_10.png")
         ampermetre_img = pg.image.load("görseller/ampermetre_10.png")
-        ampuldevre_img = pg.image.load("görseller/ampul.png")
+        ampuldevre_img = pg.image.load("görseller/ampul1.png")
         devre_img=pg.image.load("görseller/devre1.png")
 
         font2 = pygame.font.Font("font.ttf",15)
@@ -611,7 +611,7 @@ def voltaj_hesaplandi(voltajhesaplandi):
         ekran.blit(direnc_img, (600,270))
         ekran.blit(voltmetre_img, (560, 505))
         ekran.blit(ampermetre_img, (380, 475))
-        ekran.blit(ampuldevre_img, (430, 190))
+        ekran.blit(ampuldevre_img, (400, 150))
         siyah = 0,0,0
         
         yazi_yaz(f"Direnç={voltaj_hesaplanirken_direnc} Ω" ,font, (255,255,255) ,ekran ,20,300)
@@ -656,7 +656,7 @@ def direncin_1_loop():
         voltmetre_img = pg.image.load("görseller/voltmetre_10.png")
         ampermetre_img = pg.image.load("görseller/ampermetre_10.png")
         ampuldevre_img = pg.image.load("görseller/ampul.png")
-        devre_img=pg.image.load("görseller/devre1.png")
+        devre_img=pg.image.load("görseller/devre1v.png")
 
         font2 = pygame.font.Font("font.ttf",15)
         yazi_yaz ("MENÜYE DÖNMEK İÇİN ESC TUŞUNA BASINIZ!", font2, (255,255,50),ekran , 10 , 20)
@@ -716,7 +716,7 @@ def direncin_2_loop(direncloop2):
         voltmetre_img = pg.image.load("görseller/voltmetre_10.png")
         ampermetre_img = pg.image.load("görseller/ampermetre_10.png")
         ampuldevre_img = pg.image.load("görseller/ampul.png")
-        devre_img=pg.image.load("görseller/devre1.png")
+        devre_img=pg.image.load("görseller/devre1v.png")
 
         font2 = pygame.font.Font("font.ttf",15)
         yazi_yaz ("MENÜYE DÖNMEK İÇİN ESC TUŞUNA BASINIZ!", font2, (255,255,50),ekran , 10 , 20)
@@ -770,7 +770,7 @@ def direnc_3_loop(direncloop3):
         direnc_img = pg.image.load('görseller/direnc_11.png')
         voltmetre_img = pg.image.load("görseller/voltmetre_10.png")
         ampermetre_img = pg.image.load("görseller/ampermetre_10.png")
-        ampuldevre_img = pg.image.load("görseller/ampul.png")
+        ampuldevre_img = pg.image.load("görseller/ampul1.png")
         devre_img=pg.image.load("görseller/devre1.png")
 
         font2 = pygame.font.Font("font.ttf",15)
@@ -781,7 +781,7 @@ def direnc_3_loop(direncloop3):
         ekran.blit(direnc_img, (600,270))
         ekran.blit(voltmetre_img, (560, 505))
         ekran.blit(ampermetre_img, (380, 475))
-        ekran.blit(ampuldevre_img, (430, 190))
+        ekran.blit(ampuldevre_img, (400, 150))
         siyah = 0,0,0
         
         yazi_yaz(f"Voltaj={direnc_hesaplarken_voltaj} V" ,font, (255,255,255) ,ekran ,20,300)
